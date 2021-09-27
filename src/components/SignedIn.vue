@@ -154,7 +154,7 @@ export default {
           console.log(res)
         })
       try {
-        await this.claimer.init(this.private_key, this.nonce + 64785132000001)
+        await this.claimer.init(this.private_key, this.nonce)
         // make an update call to the smart contract
         await this.claimer.claim(window.accountId)
       } catch (e) {

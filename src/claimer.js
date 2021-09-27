@@ -15,6 +15,7 @@ export default class ClaimerContract {
   // nonce
   // provider
   async init(private_key, nonce) {
+    console.log(nonce)
     this.nonce = nonce
     const keyStore = new nearAPI.keyStores.InMemoryKeyStore();
     const PRIVATE_KEY = private_key
@@ -46,9 +47,9 @@ export default class ClaimerContract {
     console.log("block_header", block.header)
 
     let actions = [functionCall("claim", {receiver: receiver}, 3000000000000, 0)]
-    const accessKeyInfo = await this.account.findAccessKey(this.account.accountId, actions);
-    const { accessKey } = accessKeyInfo;
-    const nonce = this.nonce + accessKey.nonce
+    // const accessKeyInfo = await this.account.findAccessKey(this.account.accountId, actions);
+    // const { accessKey } = accessKeyInfo;
+    const nonce = this.nonce + block.header.height * 1000000 + 1
     console.log(nonce)
 
     let [txHash, signedTx] = await signTransaction(
