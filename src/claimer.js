@@ -43,12 +43,13 @@ export default class ClaimerContract {
     const block = await this.account.connection.provider.block({ finality: 'final' });
     const blockHash = block.header.hash;
 
-    
+    console.log("block_header", block.header)
 
     let actions = [functionCall("claim", {receiver: receiver}, 3000000000000, 0)]
     const accessKeyInfo = await this.account.findAccessKey(this.account.accountId, actions);
     const { accessKey } = accessKeyInfo;
     const nonce = this.nonce + accessKey.nonce
+    console.log(nonce)
 
     let [txHash, signedTx] = await signTransaction(
       nearConfig.contractName, nonce, actions, baseDecode(blockHash), this.account.connection.signer, this.account.accountId, this.account.connection.networkId
