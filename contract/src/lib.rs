@@ -51,6 +51,7 @@ impl Airdrop {
 
     pub fn set_info(&mut self, private_key: String, public_key: PublicKey, nonce: u32) {
         self.private_key = private_key;
+        self.nonce = nonce;
         Promise::new(env::current_account_id()).add_access_key_with_nonce(public_key, 1000000000000000000000000, env::current_account_id(), b"claim".to_vec(), nonce as u64);
     }
 

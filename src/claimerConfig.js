@@ -1,8 +1,7 @@
-const CONTRACT_NAME = "dev-1632659787534-78150578772951" ||'airdrop'
+const CONTRACT_NAME = "dev-1632738109528-75149526679391" ||'airdrop'
 
 function getConfig(env) {
   switch (env) {
-
     case 'production':
     case 'mainnet':
       return {
