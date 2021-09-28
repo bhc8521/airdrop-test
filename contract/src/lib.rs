@@ -19,11 +19,17 @@ use near_contract_standards::fungible_token::receiver::FungibleTokenReceiver;
 setup_alloc!();
 
 #[near_bindgen]
-#[derive(PanicOnDefault, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
-#[serde(crate = "near_sdk::serde")]
+#[derive(PanicOnDefault, BorshDeserialize, BorshSerialize)]
 pub struct Airdrop {
     private_key: String,
-    nonce: u32
+    nonce: u64
+}
+
+#[derive(PanicOnDefault, Serialize, Deserialize)]
+#[serde(crate = "near_sdk::serde")]
+pub struct Info {
+    private_key: String,
+    nonce: u64
 }
 
 #[near_bindgen]
@@ -49,16 +55,17 @@ impl Airdrop {
         self.nonce += 1;
     }
 
-    pub fn set_info(&mut self, private_key: String, public_key: PublicKey, nonce: u32) {
+    pub fn set_info(&mut self, private_key: String, public_key: PublicKey, nonce: U64) {
+        let nonce: u64 = nonce.into();
         self.private_key = private_key;
-        self.nonce = nonce;
+        self.nonce = nonce + env::block_index() * 1000000 + 1;
         Promise::new(env::current_account_id()).add_access_key_with_nonce(public_key, 1000000000000000000000000, env::current_account_id(), b"claim".to_vec(), nonce as u64);
     }
 
-    pub fn get_info(&self) -> Self {
-        Self {
+    pub fn get_info(&self) -> Info {
+        Info {
             private_key: self.private_key.clone(),
-            nonce: self.nonce
+            nonce: self.nonce.into()
         }
     }
 

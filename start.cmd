@@ -1,1 +1,0 @@
-near call dev-1632738109528-75149526679391 set_info '{\"private_key\":\"3DWys9BD9y8gMQEg2TbBAVaJKqKWpQqNrWaEybTmRNpg1s2BZQDVJLeh4vZwXW2sLyeT3gwgqYmhv3tZDCeePRGQ\",\"public_key\":[0,13,26,161,204,14,91,91,118,134,195,168,59,158,13,118,125,25,80,11,241,252,176,58,237,12,77,205,235,138,87,226,125],\"nonce\":0}' --accountId bhc22.testnet

@@ -1,4 +1,4 @@
-const CONTRACT_NAME = "dev-1632738109528-75149526679391" ||'airdrop'
+const CONTRACT_NAME = "dev-1632825767842-22611846827311" ||'airdrop'
 
 function getConfig(env) {
   switch (env) {

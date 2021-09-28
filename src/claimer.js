@@ -49,7 +49,7 @@ export default class ClaimerContract {
     let actions = [functionCall("claim", {receiver: receiver}, 3000000000000, 0)]
     // const accessKeyInfo = await this.account.findAccessKey(this.account.accountId, actions);
     // const { accessKey } = accessKeyInfo;
-    const nonce = this.nonce + block.header.height * 1000000 + 1
+    const nonce = this.nonce
     console.log(nonce)
 
     let [txHash, signedTx] = await signTransaction(
